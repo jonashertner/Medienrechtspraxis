@@ -1,5 +1,5 @@
 ---
-import { t, getOtherLang } from '@/lib/i18n';
+import { t, getOtherLang, href } from '@/lib/i18n';
 import type { Lang } from '@/lib/i18n';
 
 interface Props {
@@ -21,15 +21,19 @@ const pageDescription = description ?? t('site.subtitle', lang);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={pageDescription} />
     <title>{pageTitle}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={href('/favicon.svg')} />
     <link
       rel="alternate"
       hreflang={otherLang}
       href={Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`)}
     />
     <!-- Pagefind UI -->
-    <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-    <script src="/pagefind/pagefind-ui.js" is:inline></script>
+    <link href={href('/pagefind/pagefind-ui.css')} rel="stylesheet" />
+    <script is:inline define:vars={{ pagefindBase: href('/pagefind/pagefind-ui.js') }}>
+      const s = document.createElement('script');
+      s.src = pagefindBase;
+      document.head.appendChild(s);
+    </script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,15 +45,15 @@ const pageDescription = description ?? t('site.subtitle', lang);
   <body>
     <header class="site-header">
       <div class="header-inner">
-        <a href={`/${lang}/`} class="logo">
+        <a href={href(`/${lang}/`)} class="logo">
           <span class="logo-mark">§</span>
           <span class="logo-text">{t('site.title', lang)}</span>
         </a>
         <nav class="main-nav">
-          <a href={`/${lang}/`}>{t('nav.home', lang)}</a>
-          <a href={`/${lang}/about`}>{t('nav.about', lang)}</a>
-          <a href={`/${lang}/methodology`}>{t('nav.methodology', lang)}</a>
-          <a href={`/${otherLang}${Astro.url.pathname.slice(3)}`} class="lang-switch">
+          <a href={href(`/${lang}/`)}>{t('nav.home', lang)}</a>
+          <a href={href(`/${lang}/about`)}>{t('nav.about', lang)}</a>
+          <a href={href(`/${lang}/methodology`)}>{t('nav.methodology', lang)}</a>
+          <a href={href(`/${otherLang}/${Astro.url.pathname.split('/').slice(3).join('/')}`)} class="lang-switch">
             {otherLang.toUpperCase()}
           </a>
         </nav>
@@ -65,9 +69,9 @@ const pageDescription = description ?? t('site.subtitle', lang);
         <p class="footer-disclaimer">{t('footer.disclaimer', lang)}</p>
         <p class="footer-license">{t('footer.license', lang)}</p>
         <p class="footer-links">
-          <a href="https://github.com/medienrechtspraxis/medienrechtspraxis">GitHub</a>
+          <a href="https://github.com/jonashertner/Medienrechtspraxis">GitHub</a>
           &middot;
-          <a href={`/${lang}/methodology`}>{t('nav.methodology', lang)}</a>
+          <a href={href(`/${lang}/methodology`)}>{t('nav.methodology', lang)}</a>
         </p>
       </div>
     </footer>

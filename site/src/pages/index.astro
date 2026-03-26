@@ -1,3 +1,4 @@
 ---
-return Astro.redirect('/de/');
+import { href } from '@/lib/i18n';
+return Astro.redirect(href('/de/'));
 ---

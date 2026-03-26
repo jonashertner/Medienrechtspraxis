@@ -1,5 +1,5 @@
 ---
-import { t } from '@/lib/i18n';
+import { t, href } from '@/lib/i18n';
 import type { Lang } from '@/lib/i18n';
 import { getRecentUpdates } from '@/lib/content';
 import { formatDate } from '@/lib/topics';
@@ -26,7 +26,7 @@ const layerLabels: Record<string, Record<string, string>> = {
       {updates.map((u) => (
         <li class="update-item">
           <time datetime={u.date}>{formatDate(u.date, lang)}</time>
-          <a href={`/${lang}/${u.slug}#${u.layer}`}>
+          <a href={href(`/${lang}/${u.slug}#${u.layer}`)}>
             {u.title} — {layerLabels[u.layer]?.[lang] ?? u.layer}
           </a>
         </li>

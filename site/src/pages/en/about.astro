@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { href } from '@/lib/i18n';
 ---
 
 <BaseLayout title="About" lang="en">
@@ -45,7 +46,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     <p>
       All content is freely available under <strong>CC-BY-SA 4.0</strong>.
       The complete source code is on
-      <a href="https://github.com/medienrechtspraxis/medienrechtspraxis">GitHub</a>.
+      <a href="https://github.com/jonashertner/Medienrechtspraxis">GitHub</a>.
     </p>
 
     <h2>MCP Server</h2>
@@ -59,7 +60,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     <p>
       Medienrechtspraxis does <strong>not constitute legal advice</strong>. Content is AI-generated
       and automatically quality-checked. Professional legal counsel is essential for legal decisions.
-      See <a href="/en/methodology">Methodology</a> for details on the generation process.
+      See <a href={href('/en/methodology')}>Methodology</a> for details on the generation process.
     </p>
   </article>
 </BaseLayout>

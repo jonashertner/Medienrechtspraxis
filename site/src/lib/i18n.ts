@@ -86,3 +86,14 @@ export function t(key: string, lang: Lang): string {
 export function getOtherLang(lang: Lang): Lang {
   return lang === 'de' ? 'en' : 'de';
 }
+
+/** Returns the base path (e.g. "/Medienrechtspraxis") without trailing slash. */
+export function base(): string {
+  const b = import.meta.env.BASE_URL ?? '/';
+  return b.endsWith('/') ? b.slice(0, -1) : b;
+}
+
+/** Build a path with the base prefix. */
+export function href(path: string): string {
+  return `${base()}${path.startsWith('/') ? path : '/' + path}`;
+}

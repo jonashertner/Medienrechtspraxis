@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { href } from '@/lib/i18n';
 ---
 
 <BaseLayout title="Über das Projekt" lang="de">
@@ -52,7 +53,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     <p>
       Alle Inhalte sind frei zugänglich und unter <strong>CC-BY-SA 4.0</strong> lizenziert.
       Der vollständige Quellcode ist auf
-      <a href="https://github.com/medienrechtspraxis/medienrechtspraxis">GitHub</a> verfügbar.
+      <a href="https://github.com/jonashertner/Medienrechtspraxis">GitHub</a> verfügbar.
     </p>
 
     <h2>MCP-Server</h2>
@@ -67,7 +68,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
       Medienrechtspraxis bietet <strong>keine Rechtsberatung</strong>. Die Inhalte werden
       KI-gestützt generiert und automatisiert qualitätsgeprüft. Für rechtliche Entscheidungen
       ist die Konsultation einer Fachperson unerlässlich. Siehe
-      <a href="/de/methodology">Methodik</a> für Details zum Erstellungsprozess.
+      <a href={href('/de/methodology')}>Methodik</a> für Details zum Erstellungsprozess.
     </p>
   </article>
 </BaseLayout>

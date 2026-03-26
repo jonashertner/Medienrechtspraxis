@@ -1,6 +1,7 @@
 ---
 import type { TopicMeta } from '@/lib/content';
 import type { Lang } from '@/lib/i18n';
+import { href as buildHref } from '@/lib/i18n';
 import { getTopicTitle, getTopicDescription, getLatestUpdate, formatDate } from '@/lib/topics';
 
 interface Props {
@@ -12,10 +13,10 @@ const { meta, lang } = Astro.props;
 const title = getTopicTitle(meta, lang);
 const description = getTopicDescription(meta, lang);
 const lastUpdated = getLatestUpdate(meta);
-const href = `/${lang}/${meta.slug}`;
+const cardHref = buildHref(`/${lang}/${meta.slug}`);
 ---
 
-<a href={href} class="topic-card">
+<a href={cardHref} class="topic-card">
   <h3 class="card-title">{title}</h3>
   <p class="card-description">{description}</p>
   <div class="card-footer">
