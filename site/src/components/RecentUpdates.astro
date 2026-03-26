@@ -1,0 +1,71 @@
+---
+import { t } from '@/lib/i18n';
+import type { Lang } from '@/lib/i18n';
+import { getRecentUpdates } from '@/lib/content';
+import { formatDate } from '@/lib/topics';
+
+interface Props {
+  lang: Lang;
+  limit?: number;
+}
+
+const { lang, limit = 8 } = Astro.props;
+const updates = getRecentUpdates(limit);
+
+const layerLabels: Record<string, Record<string, string>> = {
+  summary: { de: 'Praxis', en: 'Practice' },
+  doctrine: { de: 'Doktrin', en: 'Doctrine' },
+  caselaw: { de: 'Rechtsprechung', en: 'Case Law' },
+};
+---
+
+{updates.length > 0 && (
+  <section class="recent-updates">
+    <h2>{t('home.recent', lang)}</h2>
+    <ul class="updates-list">
+      {updates.map((u) => (
+        <li class="update-item">
+          <time datetime={u.date}>{formatDate(u.date, lang)}</time>
+          <a href={`/${lang}/${u.slug}#${u.layer}`}>
+            {u.title} — {layerLabels[u.layer]?.[lang] ?? u.layer}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .recent-updates {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .recent-updates h2 {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .updates-list {
+    list-style: none;
+    border-left: 2px solid var(--color-border);
+    padding-left: var(--spacing-lg);
+  }
+
+  .update-item {
+    padding: var(--spacing-sm) 0;
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: baseline;
+  }
+
+  .update-item time {
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .update-item a {
+    font-size: 0.95rem;
+  }
+</style>

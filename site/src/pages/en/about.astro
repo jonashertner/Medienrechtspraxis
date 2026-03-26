@@ -1,0 +1,85 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" lang="en">
+  <article class="prose-page">
+    <h1>About Medienrechtspraxis</h1>
+
+    <p class="lead">
+      Medienrechtspraxis is an open-access project providing daily-updated, AI-powered legal
+      commentary on Swiss media law and personality rights.
+    </p>
+
+    <h2>Mission</h2>
+    <p>
+      Swiss media law is dynamic and practically relevant — yet current commentaries are
+      often behind paywalls or outdated. Medienrechtspraxis fills this gap with freely
+      accessible, structured legal analysis updated automatically on a daily basis.
+    </p>
+
+    <h2>Audiences</h2>
+    <p>
+      <strong>Media professionals</strong> (journalists, editors, publishers) find plain-language
+      summaries, checklists, and risk assessments in the Practice layer — no legal expertise required.
+    </p>
+    <p>
+      <strong>Lawyers</strong> (media attorneys, in-house counsel) use the Doctrine layer with
+      academic analysis, marginal numbers, citations, and DACH comparative references.
+    </p>
+
+    <h2>Three Content Layers</h2>
+    <p>
+      <strong>Practice:</strong> Accessible summaries with concrete guidance.
+    </p>
+    <p>
+      <strong>Doctrine:</strong> Academic commentary with marginal numbers, full citation
+      apparatus, and comparative references to German and Austrian law.
+    </p>
+    <p>
+      <strong>Case Law:</strong> Current case law digest with thematic grouping,
+      decision summaries, and significance ratings.
+    </p>
+
+    <h2>Open Access</h2>
+    <p>
+      All content is freely available under <strong>CC-BY-SA 4.0</strong>.
+      The complete source code is on
+      <a href="https://github.com/medienrechtspraxis/medienrechtspraxis">GitHub</a>.
+    </p>
+
+    <h2>MCP Server</h2>
+    <p>
+      In addition to the website, Medienrechtspraxis provides an MCP server (Model Context Protocol)
+      enabling AI assistants to access the content programmatically, allowing LLMs to answer
+      media law questions grounded in current, quality-checked legal analysis.
+    </p>
+
+    <h2>Disclaimer</h2>
+    <p>
+      Medienrechtspraxis does <strong>not constitute legal advice</strong>. Content is AI-generated
+      and automatically quality-checked. Professional legal counsel is essential for legal decisions.
+      See <a href="/en/methodology">Methodology</a> for details on the generation process.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-page {
+    max-width: var(--width-content);
+    margin: 0 auto;
+  }
+
+  .prose-page h1 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .lead {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.6;
+  }
+</style>

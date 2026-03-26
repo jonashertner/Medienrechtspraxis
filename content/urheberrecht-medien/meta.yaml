@@ -1,0 +1,40 @@
+title:
+  de: Urheberrecht & Medien
+  en: Copyright & Media
+slug: urheberrecht-medien
+description:
+  de: 'Medienrelevantes Urheberrecht: Zitatrecht, Embedding, KI-generierte Inhalte'
+  en: 'Media-relevant copyright: quotation right, embedding, AI-generated content'
+related_articles:
+- law: URG
+  articles:
+  - '2'
+  - '10'
+  - '19'
+  - '25'
+  - '28'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - UrhG §51
+  - UrhG §57
+- jurisdiction: AT
+  laws:
+  - UrhG §42f
+  - UrhG §46
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- copyright
+- quotation-right
+- embedding
+- ai-content
+sort_order: 9

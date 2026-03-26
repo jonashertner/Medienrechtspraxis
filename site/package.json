@@ -1,0 +1,22 @@
+{
+  "name": "medienrechtspraxis-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && npx pagefind --site dist",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.16.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^14.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "pagefind": "^1.2.0",
+    "typescript": "^5.6.0"
+  }
+}

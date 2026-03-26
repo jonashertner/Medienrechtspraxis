@@ -1,0 +1,254 @@
+---
+import { t, getOtherLang } from '@/lib/i18n';
+import type { Lang } from '@/lib/i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang: Lang;
+}
+
+const { title, description, lang } = Astro.props;
+const otherLang = getOtherLang(lang);
+const pageTitle = title ? `${title} — ${t('site.title', lang)}` : t('site.title', lang);
+const pageDescription = description ?? t('site.subtitle', lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={pageDescription} />
+    <title>{pageTitle}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      hreflang={otherLang}
+      href={Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`)}
+    />
+    <!-- Pagefind UI -->
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+    <script src="/pagefind/pagefind-ui.js" is:inline></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href={`/${lang}/`} class="logo">
+          <span class="logo-mark">§</span>
+          <span class="logo-text">{t('site.title', lang)}</span>
+        </a>
+        <nav class="main-nav">
+          <a href={`/${lang}/`}>{t('nav.home', lang)}</a>
+          <a href={`/${lang}/about`}>{t('nav.about', lang)}</a>
+          <a href={`/${lang}/methodology`}>{t('nav.methodology', lang)}</a>
+          <a href={`/${otherLang}${Astro.url.pathname.slice(3)}`} class="lang-switch">
+            {otherLang.toUpperCase()}
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p class="footer-disclaimer">{t('footer.disclaimer', lang)}</p>
+        <p class="footer-license">{t('footer.license', lang)}</p>
+        <p class="footer-links">
+          <a href="https://github.com/medienrechtspraxis/medienrechtspraxis">GitHub</a>
+          &middot;
+          <a href={`/${lang}/methodology`}>{t('nav.methodology', lang)}</a>
+        </p>
+      </div>
+    </footer>
+
+    <style is:global>
+      :root {
+        --color-bg: #faf9f7;
+        --color-text: #1a1a1a;
+        --color-text-secondary: #555;
+        --color-accent: #8b2500;
+        --color-accent-light: #c44d1a;
+        --color-border: #ddd;
+        --color-border-light: #eee;
+        --color-surface: #fff;
+        --color-surface-alt: #f4f3f0;
+        --color-tag-bg: #e8e6e1;
+        --color-tag-text: #444;
+
+        --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+        --font-body: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+
+        --width-content: 800px;
+        --width-page: 1100px;
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2.5rem;
+        --spacing-2xl: 4rem;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 17px;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        font-family: var(--font-body);
+        color: var(--color-text);
+        background: var(--color-bg);
+        line-height: 1.65;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      h1, h2, h3, h4 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        line-height: 1.25;
+        color: var(--color-text);
+      }
+
+      h1 { font-size: 2.4rem; letter-spacing: -0.02em; }
+      h2 { font-size: 1.7rem; margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md); }
+      h3 { font-size: 1.3rem; margin-top: var(--spacing-lg); margin-bottom: var(--spacing-sm); }
+
+      a {
+        color: var(--color-accent);
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+      a:hover {
+        color: var(--color-accent-light);
+      }
+
+      p { margin-bottom: var(--spacing-md); }
+
+      .site-header {
+        border-bottom: 1px solid var(--color-border);
+        background: var(--color-surface);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-inner {
+        max-width: var(--width-page);
+        margin: 0 auto;
+        padding: var(--spacing-md) var(--spacing-lg);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        display: flex;
+        align-items: baseline;
+        gap: var(--spacing-sm);
+        text-decoration: none;
+        color: var(--color-text);
+      }
+
+      .logo-mark {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--color-accent);
+      }
+
+      .logo-text {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .main-nav {
+        display: flex;
+        gap: var(--spacing-lg);
+        align-items: center;
+        font-size: 0.9rem;
+      }
+
+      .main-nav a {
+        color: var(--color-text-secondary);
+        font-weight: 500;
+      }
+      .main-nav a:hover {
+        color: var(--color-accent);
+      }
+
+      .lang-switch {
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+      }
+
+      .site-main {
+        flex: 1;
+        max-width: var(--width-page);
+        margin: 0 auto;
+        padding: var(--spacing-xl) var(--spacing-lg);
+        width: 100%;
+      }
+
+      .site-footer {
+        border-top: 1px solid var(--color-border);
+        background: var(--color-surface-alt);
+        margin-top: var(--spacing-2xl);
+      }
+
+      .footer-inner {
+        max-width: var(--width-page);
+        margin: 0 auto;
+        padding: var(--spacing-xl) var(--spacing-lg);
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--color-text-secondary);
+      }
+
+      .footer-inner p { margin-bottom: var(--spacing-xs); }
+
+      .footer-disclaimer {
+        font-weight: 600;
+        color: var(--color-accent);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        html { font-size: 16px; }
+        h1 { font-size: 1.8rem; }
+
+        .header-inner {
+          flex-direction: column;
+          gap: var(--spacing-sm);
+        }
+
+        .main-nav { gap: var(--spacing-md); }
+      }
+    </style>
+  </body>
+</html>

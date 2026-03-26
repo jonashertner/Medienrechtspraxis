@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Über das Projekt" lang="de">
+  <article class="prose-page">
+    <h1>Über Medienrechtspraxis</h1>
+
+    <p class="lead">
+      Medienrechtspraxis ist ein Open-Access-Projekt, das tagesaktuelle, KI-gestützte Rechtskommentierung
+      zum Schweizer Medienrecht und Persönlichkeitsschutz bereitstellt.
+    </p>
+
+    <h2>Ziel</h2>
+    <p>
+      Schweizer Medienrecht ist dynamisch und praxisrelevant — doch aktuelle Kommentierungen sind
+      oft hinter Paywalls oder veraltet. Medienrechtspraxis schliesst diese Lücke mit frei
+      zugänglichen, strukturierten Rechtsanalysen, die täglich automatisiert aktualisiert werden.
+    </p>
+
+    <h2>Zielgruppen</h2>
+    <p>
+      Das Projekt richtet sich an zwei Hauptgruppen:
+    </p>
+    <p>
+      <strong>Medienschaffende</strong> (Journalistinnen, Redaktoren, Verlegerinnen) finden in der
+      Praxis-Ebene verständliche Zusammenfassungen, Checklisten und Risikoeinschätzungen —
+      ohne juristische Vorkenntnisse.
+    </p>
+    <p>
+      <strong>Juristinnen und Juristen</strong> (Medienanwälte, Unternehmensjuristen) nutzen die
+      Doktrin-Ebene mit akademischer Analyse, Randziffern, Quellenangaben und DACH-Rechtsvergleich.
+    </p>
+
+    <h2>Drei Inhaltsebenen</h2>
+    <p>
+      Jedes Thema wird in drei Ebenen aufbereitet:
+    </p>
+    <p>
+      <strong>Praxis:</strong> Verständliche Zusammenfassung mit konkreten Handlungsempfehlungen.
+    </p>
+    <p>
+      <strong>Doktrin:</strong> Akademische Kommentierung mit Randziffern, Quellenapparat und
+      rechtsvergleichenden Bezügen zu Deutschland und Österreich.
+    </p>
+    <p>
+      <strong>Rechtsprechung:</strong> Aktuelle Rechtsprechungsübersicht mit thematischer
+      Gliederung, Entscheidungszusammenfassungen und Relevanzeinschätzungen.
+    </p>
+
+    <h2>Open Access</h2>
+    <p>
+      Alle Inhalte sind frei zugänglich und unter <strong>CC-BY-SA 4.0</strong> lizenziert.
+      Der vollständige Quellcode ist auf
+      <a href="https://github.com/medienrechtspraxis/medienrechtspraxis">GitHub</a> verfügbar.
+    </p>
+
+    <h2>MCP-Server</h2>
+    <p>
+      Neben der Website stellt Medienrechtspraxis einen MCP-Server (Model Context Protocol) bereit,
+      der KI-Assistenten den strukturierten Zugriff auf die Inhalte ermöglicht. So können
+      LLMs medienrechtliche Fragen auf Basis aktueller, geprüfter Rechtsanalysen beantworten.
+    </p>
+
+    <h2>Hinweis</h2>
+    <p>
+      Medienrechtspraxis bietet <strong>keine Rechtsberatung</strong>. Die Inhalte werden
+      KI-gestützt generiert und automatisiert qualitätsgeprüft. Für rechtliche Entscheidungen
+      ist die Konsultation einer Fachperson unerlässlich. Siehe
+      <a href="/de/methodology">Methodik</a> für Details zum Erstellungsprozess.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-page {
+    max-width: var(--width-content);
+    margin: 0 auto;
+  }
+
+  .prose-page h1 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .lead {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.6;
+  }
+</style>

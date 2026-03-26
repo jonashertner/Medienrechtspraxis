@@ -1,0 +1,25 @@
+title:
+  de: "Persönlichkeitsschutz"
+  en: "Protection of Personality Rights"
+slug: persoenlichkeitsschutz
+description:
+  de: "Zivilrechtlicher Schutz der Persönlichkeit gegen Medienberichterstattung"
+  en: "Civil law protection of personality against media reporting"
+related_articles:
+  - law: ZGB
+    articles: ["28", "28a", "28b", "28c", "28d", "28e", "28f", "28g", "28h", "28i", "28k", "28l"]
+  - law: EMRK
+    articles: ["8", "10"]
+  - law: BV
+    articles: ["10", "13", "17"]
+dach_references:
+  - jurisdiction: DE
+    laws: ["BGB §823", "BGB §1004", "KUG §22-23"]
+  - jurisdiction: AT
+    laws: ["ABGB §16", "MedienG §6-8"]
+layers:
+  summary: { status: draft, updated: null }
+  doctrine: { status: draft, updated: null }
+  caselaw: { status: draft, updated: null }
+tags: ["privacy", "personality-rights", "injunction", "media-reporting"]
+sort_order: 1

@@ -1,0 +1,348 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { t } from '@/lib/i18n';
+import type { Lang } from '@/lib/i18n';
+import type { TopicContent } from '@/lib/content';
+import { getTopicTitle, getTopicDescription, getLatestUpdate, formatDate } from '@/lib/topics';
+import { marked } from 'marked';
+
+interface Props {
+  topic: TopicContent;
+  lang: Lang;
+}
+
+const { topic, lang } = Astro.props;
+const title = getTopicTitle(topic.meta, lang);
+const description = getTopicDescription(topic.meta, lang);
+const lastUpdated = getLatestUpdate(topic.meta);
+
+const layers = ['summary', 'doctrine', 'caselaw'] as const;
+const layerKeys = { summary: 'tab.summary', doctrine: 'tab.doctrine', caselaw: 'tab.caselaw' } as const;
+
+function getLayerContent(layer: typeof layers[number]): string | null {
+  const raw = topic[layer][lang];
+  return raw ?? null;
+}
+
+function renderMarkdown(md: string): string {
+  return marked.parse(md, { async: false }) as string;
+}
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <article class="topic-page">
+    <header class="topic-header">
+      <h1>{title}</h1>
+      <p class="topic-description">{description}</p>
+      {lastUpdated && (
+        <p class="topic-updated">
+          {t('topic.updated', lang)}: {formatDate(lastUpdated, lang)}
+        </p>
+      )}
+    </header>
+
+    <div class="topic-layout">
+      <div class="topic-content">
+        <!-- Tab Navigation -->
+        <nav class="layer-tabs" role="tablist">
+          {layers.map((layer, i) => (
+            <button
+              role="tab"
+              class={`tab-btn ${i === 0 ? 'active' : ''}`}
+              data-tab={layer}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              aria-controls={`panel-${layer}`}
+            >
+              {t(layerKeys[layer], lang)}
+            </button>
+          ))}
+        </nav>
+
+        <!-- Tab Panels -->
+        {layers.map((layer, i) => {
+          const content = getLayerContent(layer);
+          return (
+            <div
+              id={`panel-${layer}`}
+              role="tabpanel"
+              class={`tab-panel ${i === 0 ? 'active' : ''}`}
+              data-panel={layer}
+              data-pagefind-body
+            >
+              {content ? (
+                <div class="prose" set:html={renderMarkdown(content)} />
+              ) : (
+                <p class="content-unavailable">{t('content.unavailable', lang)}</p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="topic-sidebar">
+        <!-- Related Articles -->
+        <section class="sidebar-section">
+          <h3>{t('topic.related', lang)}</h3>
+          <ul class="related-articles">
+            {topic.meta.related_articles.map((entry) =>
+              entry.articles.map((art) => (
+                <li>
+                  <span class="law-badge">{entry.law}</span> Art. {art}
+                </li>
+              ))
+            )}
+          </ul>
+        </section>
+
+        <!-- DACH References -->
+        {topic.meta.dach_references.length > 0 && (
+          <section class="sidebar-section">
+            <h3>{t('topic.dach', lang)}</h3>
+            {topic.meta.dach_references.map((ref) => (
+              <div class="dach-ref">
+                <span class="jurisdiction-badge">{ref.jurisdiction}</span>
+                <ul>
+                  {ref.laws.map((law) => <li>{law}</li>)}
+                </ul>
+              </div>
+            ))}
+          </section>
+        )}
+
+        <!-- Tags -->
+        <section class="sidebar-section">
+          <h3>{t('topic.tags', lang)}</h3>
+          <div class="tag-list">
+            {topic.meta.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </section>
+      </aside>
+    </div>
+  </article>
+
+  <script is:inline>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        // Update buttons
+        document.querySelectorAll('.tab-btn').forEach((b) => {
+          b.classList.toggle('active', b.dataset.tab === tab);
+          b.setAttribute('aria-selected', b.dataset.tab === tab ? 'true' : 'false');
+        });
+        // Update panels
+        document.querySelectorAll('.tab-panel').forEach((p) => {
+          p.classList.toggle('active', p.dataset.panel === tab);
+        });
+        // Update URL hash
+        history.replaceState(null, '', `#${tab}`);
+      });
+    });
+
+    // Activate tab from URL hash
+    const hash = window.location.hash.slice(1);
+    if (['summary', 'doctrine', 'caselaw'].includes(hash)) {
+      document.querySelector(`[data-tab="${hash}"]`)?.click();
+    }
+  </script>
+
+  <style>
+    .topic-header {
+      margin-bottom: var(--spacing-xl);
+      padding-bottom: var(--spacing-lg);
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    .topic-description {
+      font-size: 1.15rem;
+      color: var(--color-text-secondary);
+      margin-top: var(--spacing-sm);
+      font-family: var(--font-display);
+      font-style: italic;
+    }
+
+    .topic-updated {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      margin-top: var(--spacing-sm);
+    }
+
+    .topic-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: var(--spacing-xl);
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .topic-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Tabs */
+    .layer-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--color-border);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .tab-btn {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: var(--spacing-sm) var(--spacing-lg);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--color-accent);
+    }
+
+    .tab-btn.active {
+      color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .content-unavailable {
+      color: var(--color-text-secondary);
+      font-style: italic;
+      padding: var(--spacing-xl) 0;
+    }
+
+    /* Prose styling */
+    .prose :global(h2) {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      border-bottom: 1px solid var(--color-border-light);
+      padding-bottom: var(--spacing-sm);
+    }
+
+    .prose :global(h3) {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+    }
+
+    .prose :global(ul), .prose :global(ol) {
+      margin-left: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .prose :global(li) {
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .prose :global(blockquote) {
+      border-left: 3px solid var(--color-accent);
+      padding-left: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+      color: var(--color-text-secondary);
+      font-style: italic;
+    }
+
+    .prose :global(code) {
+      background: var(--color-surface-alt);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    /* Sidebar */
+    .topic-sidebar {
+      position: sticky;
+      top: 80px;
+    }
+
+    .sidebar-section {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .sidebar-section h3 {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .related-articles {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .related-articles li {
+      padding: var(--spacing-xs) 0;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .law-badge {
+      display: inline-block;
+      background: var(--color-accent);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-right: var(--spacing-xs);
+      letter-spacing: 0.03em;
+    }
+
+    .jurisdiction-badge {
+      display: inline-block;
+      background: var(--color-tag-bg);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .dach-ref {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .dach-ref ul {
+      list-style: none;
+      font-size: 0.85rem;
+      margin-top: var(--spacing-xs);
+    }
+
+    .dach-ref li {
+      padding: 2px 0;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+    }
+
+    .tag {
+      background: var(--color-tag-bg);
+      color: var(--color-tag-text);
+      font-size: 0.78rem;
+      padding: 2px 10px;
+      border-radius: 12px;
+    }
+  </style>
+</BaseLayout>

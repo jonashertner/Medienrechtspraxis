@@ -1,0 +1,20 @@
+---
+import TopicLayout from '@/layouts/TopicLayout.astro';
+import { getTopicSlugs, getTopicContent } from '@/lib/content';
+
+export function getStaticPaths() {
+  const slugs = getTopicSlugs();
+  return slugs.map((slug) => ({
+    params: { topic: slug },
+  }));
+}
+
+const { topic: slug } = Astro.params;
+const topic = getTopicContent(slug as string);
+
+if (!topic) {
+  return Astro.redirect('/en/');
+}
+---
+
+<TopicLayout topic={topic} lang="en" />

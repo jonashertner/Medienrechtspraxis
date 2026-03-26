@@ -1,0 +1,42 @@
+title:
+  de: Werbung & Sponsoring
+  en: Advertising & Sponsoring
+slug: werbung-sponsoring
+description:
+  de: Werberecht in Medien, Influencer-Recht, Sponsoring-Regulierung
+  en: Advertising law in media, influencer law, sponsoring regulation
+related_articles:
+- law: RTVG
+  articles:
+  - '9'
+  - '10'
+  - '11'
+  - '12'
+  - '13'
+- law: UWG
+  articles:
+  - '3'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - RStV §7-8
+  - UWG §5a
+- jurisdiction: AT
+  laws:
+  - AMD-G §37-42
+  - MedienG §26
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- advertising
+- sponsoring
+- influencer-law
+sort_order: 12

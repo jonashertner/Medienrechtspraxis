@@ -1,0 +1,34 @@
+title:
+  de: Lauterkeitsrecht & Medien
+  en: Unfair Competition & Media
+slug: lauterkeitsrecht-medien
+description:
+  de: Medienrelevante Bestimmungen des UWG
+  en: Media-relevant provisions of unfair competition law
+related_articles:
+- law: UWG
+  articles:
+  - '3'
+  - '23'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - UWG §3-7
+- jurisdiction: AT
+  laws:
+  - UWG §1-2
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- unfair-competition
+- advertising
+- media
+sort_order: 10

@@ -1,0 +1,1 @@
+"""Medienrechtspraxis content generation pipeline."""

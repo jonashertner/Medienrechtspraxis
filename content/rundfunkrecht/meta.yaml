@@ -1,0 +1,44 @@
+title:
+  de: Rundfunkrecht
+  en: Broadcasting Law
+slug: rundfunkrecht
+description:
+  de: RTVG, SRG-Konzession, UBI-Praxis
+  en: Broadcasting regulation, SRG concession, UBI practice
+related_articles:
+- law: BV
+  articles:
+  - '93'
+- law: RTVG
+  articles:
+  - '4'
+  - '5'
+  - '6'
+  - '83'
+  - '86'
+  - '94'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - MStV
+  - RStV
+- jurisdiction: AT
+  laws:
+  - ORF-G
+  - AMD-G
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- broadcasting
+- rtvg
+- ubi
+- srg
+sort_order: 11

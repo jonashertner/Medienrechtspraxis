@@ -1,0 +1,39 @@
+title:
+  de: Online-Medien & Plattformhaftung
+  en: Online Media & Platform Liability
+slug: online-medien
+description:
+  de: Haftung für Online-Inhalte, DSA, Social-Media-Recht
+  en: Liability for online content, DSA, social media law
+related_articles:
+- law: ZGB
+  articles:
+  - '28'
+- law: OR
+  articles:
+  - '41'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - TMG §7-10
+  - NetzDG
+- jurisdiction: AT
+  laws:
+  - ECG §13-19
+  - KoPl-G
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- online-media
+- platform-liability
+- social-media
+- dsa
+sort_order: 8

@@ -1,0 +1,112 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Methodik" lang="de">
+  <article class="prose-page">
+    <h1>Methodik</h1>
+
+    <p class="lead">
+      Transparenz über den Erstellungsprozess ist ein Kernprinzip von Medienrechtspraxis.
+      Diese Seite dokumentiert, wie die Inhalte generiert, geprüft und aktualisiert werden.
+    </p>
+
+    <h2>KI-gestützte Inhaltsgenierung</h2>
+    <p>
+      Die Inhalte werden mit Claude (Anthropic) generiert. Für jedes Thema und jede
+      Inhaltsebene wird ein spezialisierter Prompt erstellt, der folgende Quellen einbezieht:
+    </p>
+    <p>
+      Gesetzestexte werden über das opencaselaw-MCP abgerufen und als Kontext bereitgestellt.
+      Leitentscheide des Bundesgerichts und des EGMR werden über die Rechtsprechungsdatenbank
+      identifiziert. Wissenschaftliche Kommentierungen (OnlineKommentar.ch) werden als
+      Referenzmaterial einbezogen. Themenspezifische Leitlinien steuern Struktur, Tiefe
+      und Vergleichsperspektiven.
+    </p>
+
+    <h2>Qualitätssicherung</h2>
+    <p>
+      Jeder generierte Inhalt durchläuft eine automatisierte Qualitätsprüfung durch einen
+      Evaluator-Agenten. Die Prüfung umfasst:
+    </p>
+
+    <h3>Fünf zwingende Anforderungen (alle müssen bestanden werden)</h3>
+    <p>
+      Sachliche Richtigkeit aller Rechtsaussagen. Korrekte Zitierung aller Entscheide
+      und Quellen. Keine halluzinierten Entscheide — Nulltoleranz. Korrekte Zuordnung
+      von DACH-Rechtsvergleichungen. Sprachliche Qualität (Grammatik, Terminologie, Register).
+    </p>
+
+    <h3>Fünf bewertete Dimensionen (je 1–5, Minimum 3)</h3>
+    <p>
+      Tiefe der Analyse, Vollständigkeit, Praktischer Nutzen, Quellenqualität, Lesbarkeit.
+    </p>
+    <p>
+      Besteht ein Inhalt die Prüfung nicht, wird er mit dem Feedback des Evaluators
+      neu generiert (maximal drei Versuche). Scheitert auch der dritte Versuch, wird
+      der Inhalt zur manuellen Überprüfung markiert.
+    </p>
+
+    <h2>Tägliche Aktualisierung</h2>
+    <p>
+      Jede Nacht prüft ein automatisierter Prozess (GitHub Actions), ob neue relevante
+      Gerichtsentscheide veröffentlicht wurden. Datenquelle ist die opencaselaw-API.
+      Wird ein neuer Entscheid identifiziert, werden die betroffenen Themen automatisch
+      aktualisiert — die Rechtsprechungsebene wird neu generiert, bei Leitentscheiden
+      kaskadiert die Aktualisierung auf Doktrin und Praxis.
+    </p>
+
+    <h2>Übersetzung</h2>
+    <p>
+      Die englische Fassung wird automatisch aus dem deutschen Original übersetzt.
+      Rechtsterminologie wird übersetzt, die Originalbezeichnung wird beim ersten
+      Vorkommen in Klammern beigefügt. Zitate und Gesetzesverweise bleiben im Original.
+    </p>
+
+    <h2>Datenquellen</h2>
+    <p>
+      <strong>opencaselaw.ch:</strong> Schweizer Bundesgerichtsentscheide, Gesetzestexte,
+      wissenschaftliche Kommentierungen (OnlineKommentar.ch, CC-BY-4.0).
+    </p>
+    <p>
+      <strong>Anthropic Claude:</strong> Sprachmodell für Inhaltsgenierung, Evaluation und
+      Übersetzung.
+    </p>
+
+    <h2>Einschränkungen</h2>
+    <p>
+      KI-generierte Inhalte können trotz Qualitätssicherung Fehler enthalten.
+      Die automatisierte Evaluation reduziert, eliminiert aber nicht alle Risiken.
+      Halluzinierte Entscheide werden streng geprüft, können aber nicht mit absoluter
+      Sicherheit ausgeschlossen werden. DACH-Vergleiche erheben keinen Anspruch auf
+      Vollständigkeit. Die Inhalte ersetzen keine fachkundige Rechtsberatung.
+    </p>
+
+    <h2>Quellcode</h2>
+    <p>
+      Der gesamte Code — Pipeline, Website, MCP-Server — ist auf
+      <a href="https://github.com/medienrechtspraxis/medienrechtspraxis">GitHub</a>
+      offen zugänglich.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-page {
+    max-width: var(--width-content);
+    margin: 0 auto;
+  }
+
+  .prose-page h1 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .lead {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.6;
+  }
+</style>

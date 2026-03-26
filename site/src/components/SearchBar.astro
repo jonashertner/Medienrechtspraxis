@@ -1,0 +1,51 @@
+---
+import { t } from '@/lib/i18n';
+import type { Lang } from '@/lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<div id="search" class="search-container"></div>
+
+<script is:inline define:vars={{ lang }}>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (typeof PagefindUI !== 'undefined') {
+      new PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+        translations: lang === 'de' ? {
+          placeholder: 'Themen durchsuchen…',
+          zero_results: 'Keine Ergebnisse für „[SEARCH_TERM]"',
+        } : {
+          placeholder: 'Search topics…',
+          zero_results: 'No results for "[SEARCH_TERM]"',
+        },
+      });
+    }
+  });
+</script>
+
+<style>
+  .search-container {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .search-container :global(.pagefind-ui__search-input) {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .search-container :global(.pagefind-ui__search-input:focus) {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(139, 37, 0, 0.1);
+  }
+</style>

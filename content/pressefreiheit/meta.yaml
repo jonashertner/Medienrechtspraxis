@@ -1,0 +1,38 @@
+title:
+  de: Pressefreiheit
+  en: Freedom of the Press
+slug: pressefreiheit
+description:
+  de: Verfassungsrechtlicher Rahmen der Medienfreiheit in der Schweiz
+  en: Constitutional framework of media freedom in Switzerland
+related_articles:
+- law: BV
+  articles:
+  - '16'
+  - '17'
+- law: EMRK
+  articles:
+  - '10'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - GG Art.5
+- jurisdiction: AT
+  laws:
+  - StGG Art.13
+  - EMRK Art.10
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- press-freedom
+- constitutional-law
+- media-freedom
+sort_order: 6

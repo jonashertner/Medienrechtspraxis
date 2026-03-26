@@ -1,0 +1,45 @@
+title:
+  de: Ehrverletzung
+  en: Defamation
+slug: ehrverletzung
+description:
+  de: 'Strafrechtlicher Ehrschutz: üble Nachrede, Verleumdung, Beschimpfung'
+  en: 'Criminal defamation: slander, libel, insult'
+related_articles:
+- law: StGB
+  articles:
+  - '173'
+  - '174'
+  - '175'
+  - '176'
+  - '177'
+- law: ZGB
+  articles:
+  - '28'
+- law: EMRK
+  articles:
+  - '10'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - StGB §185-187
+  - StGB §193
+- jurisdiction: AT
+  laws:
+  - StGB §111-113
+  - MedienG §6
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- defamation
+- criminal-law
+- honor-protection
+sort_order: 4

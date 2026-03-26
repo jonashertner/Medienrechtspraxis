@@ -1,0 +1,40 @@
+title:
+  de: Gegendarstellung
+  en: Right of Reply
+slug: gegendarstellung
+description:
+  de: Recht auf Gegendarstellung in periodischen Medien
+  en: Right of reply in periodical media
+related_articles:
+- law: ZGB
+  articles:
+  - 28g
+  - 28h
+  - 28i
+  - 28k
+  - 28l
+- law: EMRK
+  articles:
+  - '10'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - LPresseG §11
+- jurisdiction: AT
+  laws:
+  - MedienG §9-13
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- right-of-reply
+- media
+- correction
+sort_order: 2

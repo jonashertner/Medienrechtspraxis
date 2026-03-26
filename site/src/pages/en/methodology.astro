@@ -1,0 +1,106 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Methodology" lang="en">
+  <article class="prose-page">
+    <h1>Methodology</h1>
+
+    <p class="lead">
+      Transparency about the content creation process is a core principle of Medienrechtspraxis.
+      This page documents how content is generated, evaluated, and updated.
+    </p>
+
+    <h2>AI-Powered Content Generation</h2>
+    <p>
+      Content is generated using Claude (Anthropic). For each topic and content layer,
+      a specialised prompt is constructed incorporating statute texts retrieved via the
+      opencaselaw MCP, leading cases from the Federal Supreme Court and ECtHR identified
+      through the case law database, scholarly commentaries from OnlineKommentar.ch as
+      reference material, and topic-specific guidelines controlling structure, depth, and
+      comparative perspectives.
+    </p>
+
+    <h2>Quality Assurance</h2>
+    <p>
+      Every generated piece of content undergoes automated quality evaluation by an
+      evaluator agent.
+    </p>
+
+    <h3>Five Non-Negotiable Requirements (all must pass)</h3>
+    <p>
+      Factual accuracy of all legal statements. Correct citation of all decisions and
+      sources. No hallucinated cases — zero tolerance. Proper attribution of DACH
+      comparative references. Language quality (grammar, terminology, register).
+    </p>
+
+    <h3>Five Scored Dimensions (1–5 each, minimum 3)</h3>
+    <p>
+      Analytical depth, completeness, practical value, source quality, readability.
+    </p>
+    <p>
+      If content fails evaluation, it is regenerated with the evaluator's feedback
+      (up to three attempts). If the third attempt also fails, the content is flagged
+      for manual review.
+    </p>
+
+    <h2>Daily Updates</h2>
+    <p>
+      Every night, an automated process (GitHub Actions) checks for newly published
+      relevant court decisions via the opencaselaw API. When new decisions are identified,
+      affected topics are automatically updated — the case law layer is regenerated, and
+      for leading cases the update cascades to the doctrine and practice layers.
+    </p>
+
+    <h2>Translation</h2>
+    <p>
+      The English version is automatically translated from the German original. Legal
+      terminology is translated with the original term in parentheses on first occurrence.
+      Citations and statute references remain in their original form.
+    </p>
+
+    <h2>Data Sources</h2>
+    <p>
+      <strong>opencaselaw.ch:</strong> Swiss Federal Supreme Court decisions, statute texts,
+      scholarly commentaries (OnlineKommentar.ch, CC-BY-4.0).
+    </p>
+    <p>
+      <strong>Anthropic Claude:</strong> Language model for content generation, evaluation,
+      and translation.
+    </p>
+
+    <h2>Limitations</h2>
+    <p>
+      AI-generated content may contain errors despite quality assurance. Automated evaluation
+      reduces but does not eliminate all risks. Hallucinated decisions are strictly checked
+      but cannot be excluded with absolute certainty. DACH comparisons do not claim to be
+      exhaustive. The content does not replace professional legal advice.
+    </p>
+
+    <h2>Source Code</h2>
+    <p>
+      The complete code — pipeline, website, MCP server — is openly available on
+      <a href="https://github.com/medienrechtspraxis/medienrechtspraxis">GitHub</a>.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-page {
+    max-width: var(--width-content);
+    margin: 0 auto;
+  }
+
+  .prose-page h1 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .lead {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.6;
+  }
+</style>

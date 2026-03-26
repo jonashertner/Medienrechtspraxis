@@ -1,0 +1,37 @@
+title:
+  de: Datenschutz & Medien
+  en: Data Protection & Media
+slug: datenschutz-medien
+description:
+  de: Datenschutzrechtliches Medienprivileg und Spannungsfeld DSG/DSGVO
+  en: Media privilege in data protection law and DSG/GDPR tensions
+related_articles:
+- law: DSG
+  articles:
+  - '27'
+- law: BV
+  articles:
+  - '13'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - DSGVO Art.85
+  - BDSG §23
+- jurisdiction: AT
+  laws:
+  - DSG §9
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- data-protection
+- media-privilege
+- gdpr
+sort_order: 7

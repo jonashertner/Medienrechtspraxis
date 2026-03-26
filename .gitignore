@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.uv/
+
+# Node
+node_modules/
+dist/
+.astro/
+
+# Environment
+.env
+.env.local
+
+# Build artifacts
+site/dist/
+mcp-server/dist/
+
+# State files
+state.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.DS_Store

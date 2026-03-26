@@ -1,0 +1,93 @@
+---
+import type { TopicMeta } from '@/lib/content';
+import type { Lang } from '@/lib/i18n';
+import { getTopicTitle, getTopicDescription, getLatestUpdate, formatDate } from '@/lib/topics';
+
+interface Props {
+  meta: TopicMeta;
+  lang: Lang;
+}
+
+const { meta, lang } = Astro.props;
+const title = getTopicTitle(meta, lang);
+const description = getTopicDescription(meta, lang);
+const lastUpdated = getLatestUpdate(meta);
+const href = `/${lang}/${meta.slug}`;
+---
+
+<a href={href} class="topic-card">
+  <h3 class="card-title">{title}</h3>
+  <p class="card-description">{description}</p>
+  <div class="card-footer">
+    <div class="card-tags">
+      {meta.tags.slice(0, 3).map((tag) => (
+        <span class="card-tag">{tag}</span>
+      ))}
+    </div>
+    {lastUpdated && (
+      <time class="card-date" datetime={lastUpdated}>
+        {formatDate(lastUpdated, lang)}
+      </time>
+    )}
+  </div>
+</a>
+
+<style>
+  .topic-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--spacing-lg);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .topic-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 2px 8px rgba(139, 37, 0, 0.08);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text);
+  }
+
+  .card-description {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    flex: 1;
+    line-height: 1.5;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
+
+  .card-tag {
+    background: var(--color-tag-bg);
+    color: var(--color-tag-text);
+    font-size: 0.72rem;
+    padding: 1px 8px;
+    border-radius: 10px;
+  }
+
+  .card-date {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+  }
+</style>

@@ -1,0 +1,12 @@
+services:
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    ports:
+      - "3001:3001"
+    environment:
+      - CONTENT_DIR=/app/content
+      - PORT=3001
+    volumes:
+      - ./content:/app/content:ro

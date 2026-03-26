@@ -1,0 +1,40 @@
+title:
+  de: Quellenschutz
+  en: Protection of Journalistic Sources
+slug: quellenschutz
+description:
+  de: Schutz journalistischer Quellen und Redaktionsgeheimnis
+  en: Protection of journalistic sources and editorial secrecy
+related_articles:
+- law: BV
+  articles:
+  - '17'
+- law: StPO
+  articles:
+  - '172'
+- law: EMRK
+  articles:
+  - '10'
+dach_references:
+- jurisdiction: DE
+  laws:
+  - StPO §53 Abs.1 Nr.5
+  - GG Art.5
+- jurisdiction: AT
+  laws:
+  - MedienG §31
+layers:
+  summary:
+    status: draft
+    updated: null
+  doctrine:
+    status: draft
+    updated: null
+  caselaw:
+    status: draft
+    updated: null
+tags:
+- source-protection
+- journalist-privilege
+- editorial-secrecy
+sort_order: 3

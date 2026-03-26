@@ -1,0 +1,25 @@
+FROM node:20-slim AS builder
+
+WORKDIR /app
+COPY mcp-server/package.json mcp-server/package-lock.json* ./mcp-server/
+RUN cd mcp-server && npm ci
+
+COPY mcp-server/ ./mcp-server/
+COPY content/ ./content/
+RUN cd mcp-server && npm run build
+
+FROM node:20-slim
+
+WORKDIR /app
+COPY --from=builder /app/mcp-server/dist ./mcp-server/dist
+COPY --from=builder /app/mcp-server/package.json ./mcp-server/
+COPY --from=builder /app/mcp-server/node_modules ./mcp-server/node_modules
+COPY --from=builder /app/content ./content
+
+ENV NODE_ENV=production
+ENV CONTENT_DIR=/app/content
+ENV PORT=3001
+
+EXPOSE 3001
+
+CMD ["node", "mcp-server/dist/server.js"]

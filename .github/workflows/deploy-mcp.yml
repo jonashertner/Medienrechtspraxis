@@ -1,0 +1,50 @@
+name: Deploy MCP Server
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'mcp-server/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: mcp-server/package-lock.json
+
+      - name: Install dependencies
+        working-directory: mcp-server
+        run: npm ci
+
+      - name: Build
+        working-directory: mcp-server
+        run: npm run build
+
+      # Option A: Deploy to Cloudflare Workers
+      # Uncomment and configure when ready:
+      #
+      # - name: Deploy to Cloudflare Workers
+      #   uses: cloudflare/wrangler-action@v3
+      #   with:
+      #     apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      #     workingDirectory: mcp-server
+
+      # Option B: Deploy to a VPS / container
+      # Uncomment and configure:
+      #
+      # - name: Deploy to server
+      #   run: |
+      #     rsync -avz --delete mcp-server/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/opt/medienrechtspraxis-mcp/
+      #     ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "cd /opt/medienrechtspraxis-mcp && npm install --production && pm2 restart mcp"
+
+      - name: Build verification
+        run: echo "MCP server build successful. Configure deployment target in this workflow."
